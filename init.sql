@@ -1,0 +1,2 @@
+CREATE DATABASE emart23 ;
+CREATE USER emart23 WITH PASSWORD 'emart23secret123';
