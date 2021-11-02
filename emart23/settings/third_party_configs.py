@@ -20,3 +20,10 @@ CACHES = {
 """
 
 SAFE_DELETE_INTERPRET_UNDELETED_OBJECTS_AS_CREATED = True
+
+
+"""
+----------------------- * Django WhiteNoise Configurations * -----------------------
+"""
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

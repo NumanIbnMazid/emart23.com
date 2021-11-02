@@ -42,7 +42,7 @@ services:
                     python manage.py migrate &&
                     python manage.py initiate_admin &&
                     python manage.py collectstatic --noinput &&
-                    gunicorn emart23.wsgi:application --bind 0.0.0.0:${APP_PORT}"
+                    gunicorn emart23.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:${APP_PORT}"
     volumes:
       # - .:/emart23:rw # map data and files from parent directory in host to emart23 directory in docker containe
       # - static_volume:/home/app/emart23/static

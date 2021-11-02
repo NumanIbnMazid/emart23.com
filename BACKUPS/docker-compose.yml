@@ -1,0 +1,67 @@
+version: '1.0'
+
+services:
+  nginx:
+    container_name: 'nginx'
+    build: ./nginx
+    ports:
+      - 9001:80
+    volumes:
+      - web-static:/home/app/emart23/static
+    depends_on:
+      - web
+    restart: "on-failure"
+  db:
+    image: postgres:11-alpine
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - PGPORT=${DB_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+    restart: "on-failure"
+  redis:
+    container_name: 'redis'
+    image: redis:alpine
+    ports:
+      - '6378:6379'
+    volumes:
+      - 'redisdata:/data'
+    restart: "on-failure"
+  memcached:
+    container_name: 'memcached'
+    image: 'memcached:latest'
+    ports:
+      - "11212:11211"
+    restart: "on-failure"
+  web:
+    build: . #build the image for the web service from the dockerfile in parent directory
+    command: sh -c "python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    python manage.py initiate_admin &&
+                    python manage.py collectstatic --noinput &&
+                    gunicorn emart23.wsgi:application --bind 0.0.0.0:${APP_PORT}"
+    volumes:
+      # - .:/emart23:rw # map data and files from parent directory in host to emart23 directory in docker containe
+      # - static_volume:/home/app/emart23/static
+      - web-django:/home/app/emart23
+      - web-static:/home/app/emart23/static
+    env_file:
+      - .env
+    image: emart23
+
+    expose:
+      - ${APP_PORT}
+    restart: "on-failure"
+    depends_on:
+      - db
+      - redis
+      - memcached
+
+volumes:
+  postgres_data:
+  redisdata:
+  web-django:
+  web-static:

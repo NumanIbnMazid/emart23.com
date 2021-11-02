@@ -40,6 +40,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "users",
     "utilities",
+    # Temporary todo App for test purpose
+    "todo"
 ]
 
 INSTALLED_APPS = [
@@ -48,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # Django WhiteNoise
+    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
 ] + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -58,6 +62,8 @@ AUTH_USER_MODEL = 'users.User'
 """ *** Middlewares Definitions *** """
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # Django Whitenoise Middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

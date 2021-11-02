@@ -10,6 +10,14 @@
 
     $ docker-compose up --build
 
+    * For No Caching
+
+    $ docker-compose build --no-cache
+
+- Remove all images and containers
+
+    $ docker-compose down --rmi all
+
 - Check Docker Images
 
     $ docker images
@@ -21,3 +29,9 @@
 - Pushing image to docker hub
 
     $ docker push numanibnmazid/example_repository:latest
+
+* Project Runner Helper
+
+- Ruuning Project with Uvicorn
+
+    $ gunicorn emart23.asgi:application -k uvicorn.workers.UvicornWorker

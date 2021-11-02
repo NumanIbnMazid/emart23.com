@@ -12,9 +12,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         
-        # Delete all users
-        # get_user_model().objects.all().delete()
-        
         print('Creating superuser admin account...')
         
         if not get_user_model().objects.filter(
