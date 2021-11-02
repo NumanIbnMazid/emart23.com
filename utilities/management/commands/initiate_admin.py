@@ -11,13 +11,19 @@ load_dotenv(dotenv_path=env_path)
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        get_user_model().objects.all().delete()
+        
+        # Delete all users
+        # get_user_model().objects.all().delete()
+        
         print('Creating superuser admin account...')
-        if not get_user_model().objects.all().exists():
+        
+        if not get_user_model().objects.filter(
+            email=os.environ.get('DJANGO_SU_EMAIL')
+        ).exists():
             get_user_model().objects.create_superuser(
                 email=os.environ.get('DJANGO_SU_EMAIL'),
                 username=os.environ.get('DJANGO_SU_NAME'),
                 password=os.environ.get('DJANGO_SU_PASSWORD')
             )
         else:
-            print("Admin already exists!")
+            print(f"Admin ({os.environ.get('DJANGO_SU_EMAIL')}) already exists!")

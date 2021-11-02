@@ -8,9 +8,20 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 """
 
 import os
-
 from django.core.wsgi import get_wsgi_application
+from dotenv import load_dotenv
+from pathlib import Path
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'emart23.settings')
+""" *** Read Project Environment File *** """
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+env_path = os.path.join(BASE_DIR, ".env")
+load_dotenv(dotenv_path=env_path)
+
+if eval(os.environ.get('IS_PRODUCTION')):
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'emart23.settings.production')
+elif eval(os.environ.get('IS_STAGING')):
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'emart23.settings.staging')
+else:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'emart23.settings.development')
 
 application = get_wsgi_application()
