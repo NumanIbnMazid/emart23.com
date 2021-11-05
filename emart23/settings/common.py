@@ -15,15 +15,15 @@ load_dotenv(dotenv_path=env_path)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 """ *** DEBUG Configurations *** """
-if eval(os.environ.get('IS_PRODUCTION')) == True or eval(os.environ.get('IS_STAGING')) == True:
+if eval(str(os.environ.get('IS_PRODUCTION'))) == True or eval(str(os.environ.get('IS_STAGING'))) == True:
     DEBUG = False
 else:
     DEBUG = True
     
 """ *** Database URL Configurations *** """
-if eval(os.environ.get('IS_PRODUCTION')) and os.environ.get('PRODUCTION_DATABASE_URL'):
+if eval(str(os.environ.get('IS_PRODUCTION'))) and os.environ.get('PRODUCTION_DATABASE_URL'):
     DYNAMIC_DATABASE_URL = os.environ.get('PRODUCTION_DATABASE_URL')
-elif eval(os.environ.get('IS_STAGING')) and os.environ.get('STAGING_DATABASE_URL'):
+elif eval(str(os.environ.get('IS_STAGING'))) and os.environ.get('STAGING_DATABASE_URL'):
     DYNAMIC_DATABASE_URL = os.environ.get('STAGING_DATABASE_URL')
 elif os.environ.get('DEVELOPMENT_DATABASE_URL'):
     DYNAMIC_DATABASE_URL = os.environ.get('DEVELOPMENT_DATABASE_URL')
@@ -35,13 +35,13 @@ else:
 THIRD_PARTY_APPS = [
     # Django Safe Delete
     "safedelete",
+    # Django REST Framework
+    "rest_framework",
 ]
 
 LOCAL_APPS = [
     "users",
     "utilities",
-    # Temporary todo App for test purpose
-    "todo"
 ]
 
 INSTALLED_APPS = [
@@ -127,6 +127,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 SITE_ID = 1
 ROOT_URLCONF = 'emart23.urls'
 WSGI_APPLICATION = 'emart23.wsgi.application'
+# ASGI_APPLICATION = "emart23.routing.application"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 HOME_URL = "/"
 ADMIN_LOGIN_URL = "/admin/login"

@@ -38,11 +38,11 @@ services:
     restart: "on-failure"
   web:
     build: . #build the image for the web service from the dockerfile in parent directory
-    command: sh -c "python manage.py makemigrations &&
-                    python manage.py migrate &&
-                    python manage.py initiate_admin &&
-                    python manage.py collectstatic --noinput &&
-                    gunicorn emart23.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:${APP_PORT}"
+    command: sh -c "poetry run python manage.py makemigrations &&
+                    poetry run python manage.py migrate &&
+                    poetry run python manage.py initiate_admin &&
+                    poetry run python manage.py collectstatic --noinput &&
+                    poetry run gunicorn emart23.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:${APP_PORT}"
     volumes:
       # - .:/emart23:rw # map data and files from parent directory in host to emart23 directory in docker containe
       # - static_volume:/home/app/emart23/static

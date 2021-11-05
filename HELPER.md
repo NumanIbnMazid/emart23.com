@@ -35,3 +35,7 @@
 - Ruuning Project with Uvicorn
 
     $ gunicorn emart23.asgi:application -k uvicorn.workers.UvicornWorker
+
+* Running Project Through Poetry
+
+    $ poetry run python manage.py runserver
