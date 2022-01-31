@@ -65,17 +65,6 @@ python-versions = "*"
 Django = "*"
 
 [[package]]
-name = "djangorestframework"
-version = "3.12.4"
-description = "Web APIs for Django, made easy."
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[package.dependencies]
-django = ">=2.2"
-
-[[package]]
 name = "gunicorn"
 version = "20.1.0"
 description = "WSGI HTTP Server for UNIX"
@@ -192,7 +181,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "3.8.8"
-content-hash = "6044bd5e15b07719ddc5defa6f6be3d8993f7ee511731dd522d531897ddb4d28"
+content-hash = "5c03af9e9bbc84e6d60448cd4bab661a203ddb9b41de12325d5458d0859e5f35"
 
 [metadata.files]
 asgiref = [
@@ -218,10 +207,6 @@ django = [
 django-safedelete = [
     {file = "django-safedelete-1.1.0.tar.gz", hash = "sha256:eb725b0c24a2f38560e609de999b1f7fc0c13ea500659ed618c942734b3e72df"},
     {file = "django_safedelete-1.1.0-py3-none-any.whl", hash = "sha256:473ef5c5e4e4fefece1ddbd3b8efbdf18732e8338413166f50a7ddb087a0a858"},
-]
-djangorestframework = [
-    {file = "djangorestframework-3.12.4-py3-none-any.whl", hash = "sha256:6d1d59f623a5ad0509fe0d6bfe93cbdfe17b8116ebc8eda86d45f6e16e819aaf"},
-    {file = "djangorestframework-3.12.4.tar.gz", hash = "sha256:f747949a8ddac876e879190df194b925c177cdeb725a099db1460872f7c0a7f2"},
 ]
 gunicorn = [
     {file = "gunicorn-20.1.0-py3-none-any.whl", hash = "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e"},

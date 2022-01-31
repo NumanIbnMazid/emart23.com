@@ -35,8 +35,6 @@ else:
 THIRD_PARTY_APPS = [
     # Django Safe Delete
     "safedelete",
-    # Django REST Framework
-    "rest_framework",
 ]
 
 LOCAL_APPS = [
